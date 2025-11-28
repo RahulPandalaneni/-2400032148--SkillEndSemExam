@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Event Booking</h2>
+
+<button class="bookBtn" data-event="Concert">Book Concert</button>
+<button class="bookBtn" data-event="Workshop">Book Workshop</button>
+<button class="bookBtn" data-event="Seminar">Book Seminar</button>
+
+<script>
+const bookedEvents = [];
+
+// Memoized callback function
+function createBookHandler() {
+  return function(event) {
+    const eventName = event.target.dataset.event;
+    bookedEvents.push(eventName);
+    console.log(`Booked: ${eventName}`);
+    console.log('All booked events:', bookedEvents);
+  };
+}
+
+// Create one memoized handler
+const bookHandler = createBookHandler();
+
+// Attach click handler to all buttons
+document.querySelectorAll('.bookBtn').forEach(btn => {
+  btn.addEventListener('click', bookHandler);
+});
+
+console.log('Event handlers attached. Try clicking buttons!');
+</script>
+
+</body>
+</html>
